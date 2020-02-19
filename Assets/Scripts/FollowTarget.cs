@@ -15,7 +15,8 @@ public class FollowTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        initialPosition = this.transform.position;
+        groundPosition = ground.transform.position;
     }
 
     // Update is called once per frame
