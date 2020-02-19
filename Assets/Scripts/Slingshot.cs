@@ -41,6 +41,28 @@ public class Slingshot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isAiming)
+            return;
+
+        Vector3 mousePositionScreen = Input.mousePosition;
+        mousePositionScreen.z = -Camera.main.transform.position.z;
+        Vector3 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
+        Vector3 dragVector = mousePositionWorld - launcher.transform.position;
+
+        if (dragVector.magnitude > sphereRadius)
+        {
+            dragVector.Normalize();
+            dragVector *= sphereRadius;
+        }
+
+        activeCannonball.transform.position = launcher.transform.position + dragVector;
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isAiming = false;
+            Rigidbody rb = activeCannonball.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.velocity = -dragVector * speedMultiplier;
+        }
     }
 }
