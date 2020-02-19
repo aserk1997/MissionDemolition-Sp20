@@ -30,6 +30,14 @@ public class Slingshot : MonoBehaviour
     {
         launcher.SetActive(false);
     }
+
+    private void OnMouseDown()
+    {
+        isAiming = true;
+        activeCannonball = Instantiate(prefabCannonball) as GameObject;
+        activeCannonball.transform.position = launcher.transform.position;
+        activeCannonball.GetComponent<Rigidbody>().isKinematic = true; 
+    }
     // Update is called once per frame
     void Update()
     {
