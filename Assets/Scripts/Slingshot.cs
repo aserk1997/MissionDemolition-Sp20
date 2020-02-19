@@ -63,6 +63,9 @@ public class Slingshot : MonoBehaviour
             Rigidbody rb = activeCannonball.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.velocity = -dragVector * speedMultiplier;
+
+            GameObject cam = GameObject.Find("Main Camera");
+            cam.GetComponent<FollowTarget>().targetObject = activeCannonball;
         }
     }
 }
